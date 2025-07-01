@@ -29,7 +29,7 @@ A modern, glassmorphism-inspired note-taking web application built with FastAPI,
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/Aizyy008/notebook_fastAPI.git
    cd fast_api_notebook
    ```
 
