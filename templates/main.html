@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luminote | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #181c24 0%, #232a34 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Roboto Mono', monospace, Arial, sans-serif;
+            color: #eaf6fb;
+            overflow-x: hidden;
+        }
+        .glass {
+            background: rgba(24, 28, 36, 0.7);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 18px;
+            border: 1.5px solid rgba(44, 180, 255, 0.25);
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 72px;
+            background: rgba(24, 28, 36, 0.6);
+            border-right: 1.5px solid #1e90ff33;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 0 0 0;
+            gap: 32px;
+        }
+        .sidebar .icon {
+            width: 32px;
+            height: 32px;
+            margin: 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e90ff;
+            opacity: 0.85;
+            transition: color 0.2s, opacity 0.2s;
+            cursor: pointer;
+        }
+        .sidebar .icon.active, .sidebar .icon:hover {
+            color: #00eaff;
+            opacity: 1;
+        }
+        .main-layout {
+            display: flex;
+            margin-left: 72px;
+            min-height: 100vh;
+        }
+        .center-column {
+            flex: 2;
+            padding: 48px 32px 32px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 0;
+            justify-content: center;
+        }
+        .hero-glass {
+            width: 100%;
+            max-width: 520px;
+            border-radius: 24px;
+            border: 1.5px solid #1e90ff44;
+            background: rgba(30, 34, 44, 0.65);
+            box-shadow: 0 4px 32px #1e90ff22, 0 1.5px 0 #00eaff33;
+            padding: 48px 32px 36px 32px;
+            margin-bottom: 32px;
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            animation: fadeInUp 0.7s cubic-bezier(.4,2,.6,1) both;
+            text-align: center;
+        }
+        .main-logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 60% 40%, #00eaff 60%, #1e90ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 32px #00eaff77;
+            margin: 0 auto 24px auto;
+        }
+        .main-logo svg {
+            width: 54px;
+            height: 54px;
+            fill: #232b3e;
+        }
+        .main-title {
+            font-family: 'Inter', 'Roboto Mono', monospace, Arial, sans-serif;
+            color: #00eaff;
+            font-size: 2.4em;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-shadow: 0 0 16px #00eaff99, 0 1px 0 #000;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .main-tagline {
+            color: #eaf6fb;
+            font-size: 1.25em;
+            margin-bottom: 24px;
+            opacity: 0.92;
+            font-weight: 500;
+        }
+        .main-desc {
+            max-width: 440px;
+            margin: 0 auto 32px auto;
+            color: #00eaffcc;
+            font-size: 1.1em;
+        }
+        .cta-btn {
+            background: linear-gradient(90deg, #00eaff 60%, #1e90ff 100%);
+            color: #181c24;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 38px;
+            font-size: 1.2em;
+            letter-spacing: 1.2px;
+            box-shadow: 0 2px 12px #00eaff44;
+            transition: background 0.18s, color 0.18s, transform 0.18s;
+            margin-bottom: 18px;
+        }
+        .cta-btn:hover {
+            background: linear-gradient(90deg, #1e90ff 0%, #00eaff 100%);
+            color: #00eaff;
+            transform: scale(1.04);
+        }
+        .main-footer {
+            text-align: center;
+            color: #00eaff99;
+            font-size: 1em;
+            margin-top: 40px;
+            letter-spacing: 1.2px;
+        }
+        .right-panel {
+            flex: 1.2;
+            padding: 48px 32px 32px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-width: 0;
+            position: relative;
+        }
+        .note-editor-glass {
+            width: 100%;
+            min-height: 180px;
+            border-radius: 18px;
+            border: 1.5px solid #1e90ff44;
+            background: rgba(30, 34, 44, 0.55);
+            box-shadow: 0 4px 32px #1e90ff22, 0 1.5px 0 #00eaff33;
+            padding: 32px 24px;
+            margin-bottom: 32px;
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            animation: fadeInRight 0.7s cubic-bezier(.4,2,.6,1) both;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: none; }
+        }
+        @keyframes fadeInRight {
+            0% { opacity: 0; transform: translateX(40px); }
+            100% { opacity: 1; transform: none; }
+        }
+        @media (max-width: 1200px) {
+            .main-layout { flex-direction: column; }
+            .right-panel { padding: 32px 16px 16px 0; }
+            .center-column { padding: 32px 8px 16px 8px; }
+        }
+        @media (max-width: 900px) {
+            .main-layout { flex-direction: column; }
+            .sidebar { position: static; width: 100%; height: auto; border-right: none; box-shadow: none; flex-direction: row; gap: 0; justify-content: center; }
+            .main-content, .center-column, .right-panel { margin-left: 0; padding: 16px 2vw; }
+        }
+        @media (max-width: 600px) {
+            .center-column, .right-panel { padding: 8px 2vw; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar glass">
+        <div class="icon active" title="Home">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 8h8M8 12h8M8 16h4"/></svg>
+        </div>
+        <div class="icon" title="Notes" onclick="window.location='/notes'">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 8h8M8 12h8M8 16h4"/></svg>
+        </div>
+        <div class="icon" title="Add Note" onclick="window.location='/add-note/'">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+        </div>
+        <div class="icon" title="About" onclick="window.location='/about'">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+    </nav>
+    <div class="main-layout">
+        <div class="center-column">
+            <div class="hero-glass glass">
+                <div class="main-logo">
+                    <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" stroke="#00eaff" stroke-width="4" fill="#1e90ff" /><text x="24" y="32" text-anchor="middle" font-size="22" fill="#00eaff" font-family="Inter, Arial, sans-serif">H</text></svg>
+                </div>
+                <div class="main-title">Luminote</div>
+                <div class="main-tagline">Assemble your ideas. Unleash your potential.</div>
+                <div class="main-desc">
+                    Luminote is an Avengers-inspired, modern note-taking app for developers and heroes alike. Built with FastAPI, MongoDB, and Bootstrap, it offers a bold, secure, and seamless experience for managing your notes.<br><br>
+                    <b>Ready to join the initiative?</b>
+                </div>
+                <a href="/notes" class="cta-btn">View Notes</a>
+            </div>
+            <div class="main-footer">&copy; {{ 2024 }} Luminote &mdash; Built by Aizan Ahmed</div>
+        </div>
+        <div class="right-panel">
+            <div class="note-editor-glass glass">
+                <div style="color:#00eaff;font-family:'Inter',monospace;font-size:1.1em;font-weight:600;letter-spacing:1px;margin-bottom:12px;">Note Editor (Coming Soon)</div>
+                <div style="color:#eaf6fb;opacity:0.7;">Select a note to edit or create a new one.</div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
